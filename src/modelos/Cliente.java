@@ -2,7 +2,7 @@ package modelos;
 
 import java.sql.Date;
 
-public class Cliente extends Usuario{
+public class Cliente extends Persona{
     private int idCliente;
 
     public Cliente() {
@@ -10,10 +10,10 @@ public class Cliente extends Usuario{
 	idCliente = 0;
     }
     
-    public Cliente(String nombre, String apellido1, String apellido2, 
-	    	   Date fechaNacimiento, Direccion direccion, String telefono,
-	    	   String email, String usuario, String contrasenya, int idCliente) {
-    	super(nombre, apellido1, apellido2, fechaNacimiento, direccion, telefono, email,
+    public Cliente(int idCliente, String nombre, String apellido1, String apellido2, 
+	    	   Date fechaNacimiento, DireccionPostal direccion, String telefono,
+	    	   String email, String usuario, String contrasenya) {
+        super(nombre, apellido1, apellido2, fechaNacimiento, direccion, telefono, email,
     	      usuario, contrasenya);
     	this.idCliente = idCliente;
     }

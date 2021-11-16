@@ -6,22 +6,22 @@ public class Proveedor {
     private String nombreProveedor;
     private String email;
     private String telefono;
-    private Direccion direccion;
+    private DireccionPostal direccionPostal;
     
     public Proveedor() {
 	idProveedor = 0;
 	setNombreProveedor("The Coca Cola Company");
 	setEmail("cocacolaconil@CocaColaCompany.com");
 	setTelefono("956443365");
-	setDireccion(new Direccion());
+	setDireccionPostal(new DireccionPostal());
     }
     
-    public Proveedor(int idProveedor, String nombreProveedor, String email, String telefono, Direccion direccion) {
+    public Proveedor(int idProveedor, String nombreProveedor, String email, String telefono, DireccionPostal direccion) {
     	this.idProveedor = idProveedor;
     	setNombreProveedor(nombreProveedor);
     	setEmail(email);
     	setTelefono(telefono);
-    	setDireccion(direccion);
+    	setDireccionPostal(direccion);
     }
     
     public int getIdProveedor() {
@@ -52,11 +52,16 @@ public class Proveedor {
     	this.telefono = telefono;
     }
     
-    public Direccion getDireccion() {
-    	return direccion;
+    public DireccionPostal getDireccionPostal() {
+    	return direccionPostal;
     }
     
-    public void setDireccion(Direccion direccion) {
-    	this.direccion = direccion;
+    public void setDireccionPostal(DireccionPostal direccionPostal) {
+    	this.direccionPostal = direccionPostal;
+    }
+    
+    @Override
+    public String toString() {
+	return nombreProveedor;
     }
 }

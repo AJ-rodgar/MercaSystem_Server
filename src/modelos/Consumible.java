@@ -9,10 +9,10 @@ public class Consumible {
     private Producto producto;
     private double peso;
     private String recipiente;
-    private String tamanyo;
+    private UnidadMedida unidadMedida;
+    private double tamanyo;
     private double precioCompra;
     private double precioVenta;
-    private List<Ubicacion> ubicaciones;
     private boolean descatalogado;
     
     public Consumible() {
@@ -20,25 +20,24 @@ public class Consumible {
 	producto = new Producto();
 	peso = 0.375;
 	setRecipiente("Lata");
-	setTamanyo("330 ml");
+	unidadMedida = new UnidadMedida();
+	setTamanyo(330);
 	setPrecioCompra(0.30);
 	setPrecioVenta(0.58);
-	ubicaciones = new ArrayList<>();
 	setDescatalogado(false);
     }
     
     public Consumible(int idConsumible, Producto producto, double peso, 
-	    	      String recipiente, String tamanyo, double precioCompra, 
-	    	      double precioVenta, List<Ubicacion> ubicaciones, 
-	    	      boolean descatalogado) {
+	    	      String recipiente, UnidadMedida unidadMedida, double tamanyo, double precioCompra, 
+	    	      double precioVenta, boolean descatalogado) {
 	this.idConsumible = idConsumible;
 	this.producto = producto;
 	this.peso = peso;
     	setRecipiente(recipiente);
+    	this.unidadMedida = unidadMedida;
     	setTamanyo(tamanyo);
     	setPrecioCompra(precioCompra);
     	setPrecioVenta(precioVenta);
-    	this.ubicaciones = ubicaciones;
     	setDescatalogado(descatalogado);
     }
     
@@ -62,11 +61,15 @@ public class Consumible {
     	this.recipiente = recipiente;
     }
     
-    public String getTamanyo() {
+    public UnidadMedida getUnidadMedida() {
+	return unidadMedida;
+    }
+
+    public double getTamanyo() {
     	return tamanyo;
     }
     
-    public void setTamanyo(String tamanyo) {
+    public void setTamanyo(double tamanyo) {
     	this.tamanyo = tamanyo;
     }
     
@@ -86,25 +89,16 @@ public class Consumible {
     	this.precioVenta = precioVenta;
     }
     
-    public List<Ubicacion> getUbicaciones() {
-    	return ubicaciones;
-    }
-    
-    public void addUbicacion(Ubicacion ubicacion) {
-	ubicaciones.add(ubicacion);
-    }
-    
-    public void removeUbicacion(Ubicacion ubicacion) {
-	if (ubicaciones.contains(ubicacion)) {
-	    ubicaciones.remove(ubicacion);
-	}
-    }
-    
     public boolean isDescatalogado() {
     	return descatalogado;
     }
     
     public void setDescatalogado(boolean descatalogado) {
     	this.descatalogado = descatalogado;
+    }
+    
+    @Override
+    public String toString() {
+	return producto.getNombreProducto() + " " + tamanyo + " " + unidadMedida.getUnidad();
     }
 }

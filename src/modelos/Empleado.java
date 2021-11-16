@@ -2,7 +2,7 @@ package modelos;
 
 import java.sql.Date;
 
-public class Empleado extends Usuario{
+public class Empleado extends Persona{
 
     private int idEmpleado;
     private EstadoEmpleado estadoEmpleado;
@@ -15,10 +15,9 @@ public class Empleado extends Usuario{
 	setRol(new Rol());
     }
 	
-    public Empleado(String nombre, String apellido1, String apellido2,
-	    	    Date fechaNacimiento, Direccion direccion, String telefono, 
-	    	    String email, String usuario, String contrasenya,
-	    	    int idEmpleado, EstadoEmpleado estadoEmpleado, Rol rol) {
+    public Empleado(int idEmpleado, String nombre, String apellido1, String apellido2,
+	    	    Date fechaNacimiento, DireccionPostal direccion, String telefono, 
+	    	    String email, String usuario, String contrasenya, EstadoEmpleado estadoEmpleado, Rol rol) {
 	super(nombre, apellido1, apellido2, fechaNacimiento, direccion, telefono, email,
 		usuario, contrasenya);
 	this.idEmpleado = idEmpleado;

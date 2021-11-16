@@ -1,5 +1,7 @@
 package modelos;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,8 +24,7 @@ public class Pedido {
 	fechaPedido = Date.valueOf(LocalDate.now());
     }
     
-    public Pedido(int idPedido, EstadoPedido estadoPedido, Proveedor proveedor, List<Linea> listaPedido, 
-	    	  double precioTotal, Date fechaPedido) {
+    public Pedido(int idPedido, EstadoPedido estadoPedido, Proveedor proveedor, List<Linea> listaPedido, Date fechaPedido) {
     	this.idPedido = idPedido;
     	setEstadoPedido(estadoPedido);
     	this.proveedor = proveedor;
@@ -31,8 +32,8 @@ public class Pedido {
     	this.fechaPedido = fechaPedido;
     }
     
-    public Pedido(int idPedido, EstadoPedido estadoPedido, Proveedor proveedor, List<Linea> listaPedido, 
-	    	  double precioTotal, Date fechaPedido, Date fechaEntrega) {
+    public Pedido(int idPedido, EstadoPedido estadoPedido, Proveedor proveedor, List<Linea> listaPedido,
+	    	  Date fechaPedido, Date fechaEntrega) {
 	this.idPedido = idPedido;
     	setEstadoPedido(estadoPedido);
     	this.proveedor = proveedor;
@@ -60,7 +61,7 @@ public class Pedido {
     public double getPrecioTotal() {
 	double res = 0;
 	for (Linea l : listaPedido) {
-	    res += l.getPrecioCompra();
+	    res += l.getPrecioTotal();
 	}
     	return res;
     }
@@ -79,5 +80,23 @@ public class Pedido {
 
     public List<Linea> getListaPedido() {
 	return listaPedido;
+    }
+    
+    public void addLinea(Consumible consumible, int cantidad) {
+	double precio = new BigDecimal(consumible.getPrecioVenta() * cantidad).setScale(2, RoundingMode.HALF_UP).doubleValue();;
+	
+	for (Linea l : listaPedido) {
+	    if (l.getConsumible().equals(consumible)) {
+		listaPedido.remove(l);
+	    }
+	}
+	
+	listaPedido.add(new Linea(consumible, cantidad, precio));
+    }
+    
+    public void removeLinea(Linea linea) {
+	if (listaPedido.contains(linea)) {
+	    listaPedido.remove(linea);
+	}
     }
 }
